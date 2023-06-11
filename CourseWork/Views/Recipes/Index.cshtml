@@ -1,0 +1,44 @@
+﻿@model CourseWork.ViewModels.RecipeViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center">Рецепты текущей книги</h3>
+<hr />
+
+@foreach (var recipe in Model.Recipes)
+{
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Название рецепта:</i></b></p>
+        </div>
+        <div class="col">
+            <a asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Title (Нажмите на название, чтобы перейти на страницу айтема)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Теги:</i></b></p>
+        </div>
+        <div class="col">
+            <p>@recipe.Tags</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <a asp-controller="Recipes" asp-action="Edit" asp-route-id="@recipe.Id">
+                <button type="submit" class="btn btn-success">Изменить рецепт</button>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Recipes" asp-action="Delete" asp-route-id="@recipe.Id">
+                <button type="submit" class="btn btn-danger">Удалить рецепт</button>
+            </a>
+        </div>
+    </div>
+    <hr />
+}
+<div class="text-center">
+    <a asp-controller="RecipeBooks" asp-action="Details" asp-route-id="@Model.RecipeBook.Id">Вернуться к книге для рецептов</a>
+</div>

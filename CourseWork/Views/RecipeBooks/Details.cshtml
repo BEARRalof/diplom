@@ -1,0 +1,66 @@
+﻿@model CourseWork.Infrastructure.Models.RecipeBook
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4 class="text-center">Подробная информация о книге для рецептов "@Model.Title"</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="text-right">
+                <a asp-controller="Recipes" asp-action="Create" asp-route-id="@Model.Id">Добавить рецепт</a>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <a asp-controller="Recipes" asp-action="Index" asp-route-id="@Model.Id">Перейти к списку всех рецептов данной книги</a>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @if (Model.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Img"
+                     height="200" width="200"
+                 asp-append-version="true" />
+            }
+        </div>
+        <div class="col-sm-9 text-left">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Title)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Description)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @if (Model.Description.Contains("\r\n"))
+                    {
+                        foreach (string row in Model.Description.Split("\r\n"))
+                        {
+                            <p class="mb-0">@row</p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Description)
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="form-group text-center">
+    <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.User.UserName">В личный кабинет</a>
+</div>

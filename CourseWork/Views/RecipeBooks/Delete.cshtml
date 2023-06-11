@@ -1,0 +1,65 @@
+﻿@model CourseWork.Infrastructure.Models.RecipeBook
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<h3 class="text-center">Вы точно хотите удалить книгу для рецептов "@Model.Title"?</h3>
+<div>
+<hr />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @if (Model.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Img"
+                     height="200" width="200"
+                 asp-append-version="true" />
+            }
+        </div>
+        <div class="col-sm-9 text-left">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Title)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Description)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @if (Model.Description.Contains("\r\n"))
+                    {
+                        foreach (string row in Model.Description.Split("\r\n"))
+                        {
+                            <p class="mb-0">@row</p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Description)
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <hr />
+<form asp-action="Delete">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group text-right">
+                <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.User.UserName">В личный кабинет</a>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-dark">Удалить книгу для рецептов</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

@@ -1,0 +1,67 @@
+﻿@model CourseWork.Infrastructure.Models.User
+
+@{
+    Layout = "_PersonalLayout";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-right">
+            <p>Личный кабинет пользователя <b><i>"@Model.UserName"</i></b></p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <a class="btn btn-dark" asp-action="Create" asp-controller="RecipeBooks" asp-route-userName="@Model.UserName">Создать новую книгу</a>
+        </div>
+    </div>
+</div>
+
+<h3 class="text-center">Ваши книги для рецептов</h3>
+<hr/>
+
+@foreach (var recipeBook in Model.RecipeBooks)
+{
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Название книги для рецептов:</i></b></p>
+        </div>
+        <div class="col">
+            <a asp-controller="RecipeBooks" asp-action="Details" asp-route-id="@recipeBook.Id">@recipeBook.Title (Нажмите на название, чтобы перейти на страницу книги)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Описание книги для рецептов:</i></b></p>
+        </div>
+        <div class="col">
+            @if (recipeBook.Description.Contains("\r\n"))
+            {
+                foreach (string row in recipeBook.Description.Split("\r\n"))
+                {
+                    <p class="mb-0">@row</p>
+                }
+            }
+            else
+            {
+                <p>@recipeBook.Description</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <a asp-controller="RecipeBooks" asp-action="Edit" asp-route-id="@recipeBook.Id" asp-route-userName="@Model.UserName">
+                <button type="submit" class="btn btn-dark">Изменить книгу</button>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="RecipeBooks" asp-action="Delete" asp-route-id="@recipeBook.Id">
+                <button type="submit" class="btn btn-dark">Удалить книгу</button>
+            </a>
+        </div>
+    </div>
+    <hr/>
+}

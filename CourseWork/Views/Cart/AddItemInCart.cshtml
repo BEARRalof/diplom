@@ -1,0 +1,12 @@
+﻿@using CourseWork.Infrastructure.Models
+@model Recipe
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Вы точно желаете добавить товар в корзину?</h2>
+
+<form asp-action="AddItemInCart" method="post">
+    <input type="submit" value="Добавить" class="btn btn-primary" asp-route-id="@Model.Id" asp-route-userName="@User.Identity.Name"/>
+</form>

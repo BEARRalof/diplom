@@ -1,0 +1,84 @@
+﻿@model CourseWork.ViewModels.RecipeViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Окно добавления нового рецепта</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Recipes" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Recipe.Title" class="control-label"></label>
+                <input asp-for="Recipe.Title" name="recipe.Title" class="form-control" />
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Tags" class="control-label"></label>
+                <input name="tags" id="newTag" placeholder="#tag" class="form-control" />
+                <input id="hiddenTags" name="recipe.Tags" class="form-control" maxlength="30" type="hidden" asp-for="Recipe.Tags" />
+                <span asp-validation-for="Recipe.Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeImage" class="control-label">Загрузите изображение:</label>
+                <span asp-validation-for="RecipeImage" class="text-danger"></span>
+                <br />
+                <input asp-for="RecipeImage" type="file" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Рецепт:</label>
+                <textarea id="textarea1" asp-for="Recipe.TextField1" name="recipe.TextField1" class="form-control"></textarea>
+                <span asp-validation-for="Recipe.TextField1" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group text-center">
+                        <a asp-action="Index" asp-route-id="@Model.RecipeBook.Id">К списку рецептов</a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-dark">Добавить рецепт</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/autosize.min.js"></script>
+<script src='@Url.Content("https://unpkg.com/@yaireo/tagify")'></script>
+<script src='@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js")'></script>
+<link href=@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.css") rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    var input = document.querySelector('input[name="tags"]');
+
+    tagify = new Tagify(input,
+        {
+            editTags: {
+                clicks: 1,
+                keepInvalid: false
+            },
+            maxTags: 10
+        });
+
+    $('form').submit(function () {
+        var str = "", array = JSON.parse($('#newTag').val());
+        array.forEach(item => {
+            str += item.value + ",";
+        });
+        str = str.substring(0, (str.length - 1));
+        $('#hiddenTags').val(str);
+        return true;
+    });
+    autosize($('#textarea1')); 
+</script>

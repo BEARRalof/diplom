@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CourseWork.Infrastructure.Models.LikeOnRecipe">
+    <Position X="6.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAABAAAAAAAAAAAAAAAgABAAAAAAAAQAACAAAAAA=</HashCode>
+      <FileName>Infrastructure\Models\LikeOnRecipe.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Recipe" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CourseWork.Infrastructure.Models.Recipe">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAAAAAEAAAAAAAAAAAAAAAEACAAAAACgAAAA=</HashCode>
+      <FileName>Infrastructure\Models\Recipe.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RecipeBook" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CourseWork.Infrastructure.Models.RecipeBook">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAQAAAgAEAAAAAAIAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Models\RecipeBook.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Recipes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseWork.Infrastructure.Models.User">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAwAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LikeOnRecipes" />
+      <Property Name="RecipeBooks" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CourseWork.ViewModels.HomeViewModel">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAIAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Recipes" />
+      <Property Name="RecipeBooks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseWork.ViewModels.LoginViewModel">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAQIAAAAAAAA=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork.ViewModels.RecipeBookViewModel">
+    <Position X="12.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RecipeBookViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CollectionImage" />
+      <Property Name="RecipeBook" />
+      <Property Name="UserName" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Identity.IdentityUser" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CourseWork.ViewModels.RecipeViewModel">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Recipe" Type="CourseWork.Infrastructure.Models.Recipe" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15" Y="0.5" />
+        <Point X="15" Y="0.125" />
+        <Point X="13.875" Y="0.125" />
+        <Point X="13.875" Y="2.125" />
+        <Point X="12.333" Y="2.125" Type="JumpStart" />
+        <Point X="12.167" Y="2.125" Type="JumpEnd" />
+        <Point X="11.656" Y="2.125" />
+        <Point X="11.656" Y="2.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="LikesOnRecipe" Type="CourseWork.Infrastructure.Models.LikeOnRecipe" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.5" Y="0.5" />
+        <Point X="15.5" Y="0.125" />
+        <Point X="13.875" Y="0.125" />
+        <Point X="13.875" Y="2.125" />
+        <Point X="12.333" Y="2.125" Type="JumpStart" />
+        <Point X="12.167" Y="2.125" Type="JumpEnd" />
+        <Point X="10.927" Y="2.125" Type="JumpStart" />
+        <Point X="10.76" Y="2.125" Type="JumpEnd" />
+        <Point X="10.724" Y="2.125" Type="JumpStart" />
+        <Point X="10.557" Y="2.125" Type="JumpEnd" />
+        <Point X="7.656" Y="2.125" />
+        <Point X="7.656" Y="2.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAIAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RecipeViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Recipe" />
+      <Property Name="RecipeBook" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Recipes" />
+      <Property Name="LikesOnRecipe" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseWork.ViewModels.RegisterViewModel">
+    <Position X="17.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAgAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork.ViewModels.RolesViewModel" Collapsed="true">
+    <Position X="4.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAgAAAAgAAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\RolesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork.ViewModels.SearchViewModel">
+    <Position X="8.25" Y="2.25" Width="1.5" />
+    <InheritanceLine Type="System.Object" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="1.062" />
+        <Point X="12.25" Y="2.125" />
+        <Point X="10.927" Y="2.125" Type="JumpStart" />
+        <Point X="10.76" Y="2.125" Type="JumpEnd" />
+        <Point X="10.724" Y="2.125" Type="JumpStart" />
+        <Point X="10.557" Y="2.125" Type="JumpEnd" />
+        <Point X="9" Y="2.125" />
+        <Point X="9" Y="2.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\SearchViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Recipes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="System.String" Collapsed="true">
+    <Position X="10.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Microsoft.AspNetCore.Http.IFormFile" Collapsed="true">
+    <Position X="13" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="System.Collections.Generic.ICollection&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

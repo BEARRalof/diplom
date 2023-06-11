@@ -1,0 +1,54 @@
+﻿@model CourseWork.Infrastructure.Models.RecipeBook
+
+@{
+    ViewData["Title"] = "Коллекция " + "\"" + @Model.Title + "\"";
+}
+
+<div>
+    <h4 class="text-center">Подробная информация о книге для рецептов "@Model.Title"</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @if (Model.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Img"
+                     height="200" width="200"
+                 asp-append-version="true" />
+            }
+        </div>
+        <div class="col-sm-9 text-left">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Title)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    <i>@Html.DisplayNameFor(model => model.Description)</i>
+                </dt>
+                <dd class="col-sm-5">
+                    @if (Model.Description.Contains("\r\n"))
+                    {
+                        foreach (string row in Model.Description.Split("\r\n"))
+                        {
+                            <p class="mb-0">@row</p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Description)
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="form-group text-center">
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>

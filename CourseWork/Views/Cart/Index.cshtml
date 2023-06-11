@@ -1,0 +1,48 @@
+﻿@model CourseWork.Infrastructure.Models.Cart
+
+@{
+    ViewData["Title"] = "Корзина";
+    Layout = "_Layout";
+}
+
+<div class="collections">
+    @if (@Model == null)
+    {
+        <div class="text-center">
+            <b><i>Корзина пуста.</i></b>
+        </div>
+        <div class="text-center mt-3">
+            <a asp-controller="Home" asp-action="Index" type="submit">
+                <button class="btn btn-danger">На главную страницу</button>
+            </a>
+        </div>
+    }
+    else
+    {
+        @foreach (var el in Model.RecipesInCart)
+        {
+        <div class="row">
+            <b>Название рецепта: </b>  <p>@el.Title</p> 
+            <br />
+        </div>
+        }
+        <br />
+        <div class="row">
+            <div class="col">
+                <a asp-controller="Order" asp-action="Payment" type="submit" asp-route-id="@Model.Id" asp-route-userName="@User.Identity.Name">
+                    <button class="btn btn-danger">Оплатить</button>
+                </a>
+            </div>
+            <div class="col">
+                <a asp-action="Delete" asp-controller="Cart" asp-route-id="@Model.Id">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                </a>
+            </div>
+            <div class="col">
+                <a asp-controller="Home" asp-action="Index" type="submit" class="float-right">
+                    <button class="btn btn-danger">На главную страницу</button>
+                </a>
+            </div>
+        </div>
+    }
+</div>

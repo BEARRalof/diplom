@@ -1,0 +1,42 @@
+﻿@model CourseWork.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Авторизация";
+    Layout = "_AuthLayout";
+}
+
+<div class="container col-sm-6">
+    <div class="col-md-10 offset-md-1">
+        <section>
+            <form method="post" asp-action="Login" asp-controller="Account">
+                <h4 class="text-center">Окно авторизации</h4>
+                <hr />
+                <div class="login-form-icon text-center">
+                    <i class="fas fa-user-circle fa-8x text-secondary"></i>
+                </div>
+                <hr />
+                <div class="validation text-danger" asp-validation-summary="ModelOnly"></div>
+                <div>
+                    <div class="form-group">
+                        <label asp-for="UserName">Введите логин</label>
+                        <input type="text" asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Введите пароль</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Авторизоваться</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="Register">Зарегистрировать нового пользователя</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

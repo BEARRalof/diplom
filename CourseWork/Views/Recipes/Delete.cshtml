@@ -1,0 +1,66 @@
+﻿@model CourseWork.Infrastructure.Models.Recipe
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="text-center">Вы точно хотите удалить рецепт "@Model.Title"?</h3>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @if (Model.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Img"
+                     height="200" width="200"
+                 asp-append-version="true" />
+            }
+        </div>
+        <div class="col-sm-9 text-left">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Тэги рецепта
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Tags)
+                </dd>
+                <dt class="col-sm-4">
+                    Рецепт:
+                </dt>
+                <dd class="col-sm-5">
+                    @if (Model.TextField1.Contains("\r\n"))
+                    {
+                        foreach (string row in Model.TextField1.Split("\r\n"))
+                        {
+                            <p class="mb-0">@row</p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.TextField1)
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group text-right">
+                    <a asp-action="Index" asp-route-id="@Model.RecipeBook.Id">К списку рецептов</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-dark">Удалить рецепт</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

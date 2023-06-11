@@ -1,0 +1,102 @@
+﻿@model CourseWork.ViewModels.RecipeViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div>
+    <div class="row">
+        <div class="col-sm-11 text-center">
+            <h2>@Model.Recipe.Title</h2>
+            <h5>Рецепт из книги "@Model.Recipe.RecipeBook.Title"</h5>
+        </div>
+        <div class="col text-right">
+            <form asp-controller="Recipes">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button type="submit" class="btn btn-primary" asp-route-id="@Model.Recipe.Id"
+                            formmethod="post" asp-action="LikeItem">
+                        @if (Model.LikesOnRecipe.Any(c => c.UserName == User.Identity.Name && c.IsLiked))
+                        {
+                            <i class="fas fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-heart"></i>
+                        }
+                        @if (Model.LikesOnRecipe.Any(c => c.IsLiked))
+                        {
+                            @Model.LikesOnRecipe.Count(c => c.IsLiked)
+                        }
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary" disabled="disabled">
+                        <i class="far fa-heart"></i>
+                        @if (Model.LikesOnRecipe.Any(c => c.IsLiked))
+                        {
+                            @Model.LikesOnRecipe.Count(c => c.IsLiked)
+                        }
+                    </button>
+                }
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3 text-right">
+            @if (Model.Recipe.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Recipe.Img"
+                     height="200" width="200"
+                 asp-append-version="true" />
+            }
+        </div>
+        <div class="col-sm-9 text-left">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Тэги рецепта
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Recipe.Tags)
+                </dd>
+                <dt class="col-sm-4">
+                    Рецепт:
+                </dt>
+                <dd class="col-sm-5">
+                    @if (Model.Recipe.TextField1.Contains("\r\n"))
+                    {
+                        foreach (string row in Model.Recipe.TextField1.Split("\r\n"))
+                        {
+                            <p class="mb-0">@row</p>
+                        }
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Recipe.TextField1)
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{    
+}
+else
+{
+    <div>
+        <h5><i>Возможность лайкать рецепты доступна только авторизованным пользователям</i></h5>
+    </div>
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/autosize.min.js"></script>
+<script type="text/javascript">
+    autosize($('#textarea'));
+</script>

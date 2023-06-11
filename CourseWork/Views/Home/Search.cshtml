@@ -1,0 +1,46 @@
+﻿@model CourseWork.ViewModels.SearchViewModel
+
+@{
+    ViewData["Title"] = "Результаты по запросу " + "\"" + @Model.Query + "\"";
+    Layout = "_MainLayout";
+}
+
+<div>
+    <h5 class="text-center">Результаты поиска по запросу "@Model.Query"</h5>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-6 items">
+            <h5 class="text-center">Среди рецептов/книг</h5>
+            <hr/>
+            @if (Model.Recipes.Any())
+            {
+                @foreach (var item in Model.Recipes)
+                {
+                    <div class="row">
+                        <div class="col text-right">
+                            <p><b><i>Название рецепта:</i></b></p>
+                        </div>
+                        <div class="col">
+                            <a asp-controller="Recipes" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <p><b><i>Теги:</i></b></p>
+                        </div>
+                        <div class="col">
+                            <p>@item.Tags</p>
+                        </div>
+                    </div>
+                    <hr/>
+                }
+            }
+            else
+            {
+                <p class="text-center"><i>Ничего не найдено</i></p>
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,69 @@
+﻿@model CourseWork.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "_MainLayout";
+}
+
+<div class="row">
+    <div class="col-sm-5 items">
+        <h5 class="text-center">Последние добавленные рецепты</h5>
+        <hr />
+        @foreach (var recipe in Model.Recipes)
+        {
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Название рецепта:</i></b></p>
+                </div>
+                <div class="col">
+                    <a asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">@recipe.Title</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Теги:</i></b></p>
+                </div>
+                <div class="col">
+                    <p>@recipe.Tags</p>
+                </div>
+            </div>
+            <hr/>
+        }
+    </div>
+    <div class="col-sm-5 collections">
+        <h5 class="text-center">Книги с наибольшим количеством рецептов</h5>
+        <hr/>
+        @foreach (var recipeBook in Model.RecipeBooks)
+        {
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Название книги:</i></b></p>
+                </div>
+                <div class="col">
+                    <a asp-controller="RecipeBooks" asp-action="Show" asp-route-id="@recipeBook.Id">@recipeBook.Title</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Кол-во рецептов в книге:</i></b></p>
+                </div>
+                <div class="col">
+                    <p>@recipeBook.Recipes.Count</p>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+    <div class="col-sm-2 tags">
+        <h5 class="text-center">Тэги ингридиентов</h5>
+        <hr/>
+        <ul>
+            @foreach (var tag in Model.Tags)
+            {
+                <li>
+                    <a asp-controller="Home" asp-action="SearchByTags" asp-route-tags="@tag">@tag</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

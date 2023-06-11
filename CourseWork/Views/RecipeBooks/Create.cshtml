@@ -1,0 +1,59 @@
+﻿@model CourseWork.ViewModels.RecipeBookViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="text-center">Окно создания новой коллекции</h4>
+<hr />
+<div class="text-center">
+    <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.UserName">В личный кабинет</a>
+</div>
+<br />
+<div class="row">
+    <div class="col">
+        <form asp-controller="RecipeBooks" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RecipeBook.Title" class="control-label"></label>
+                        <input asp-for="RecipeBook.Title" class="form-control" />
+                        <span asp-validation-for="RecipeBook.Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CollectionImage" class="control-label">Загрузите изображение:</label>
+                        <span asp-validation-for="CollectionImage" class="text-danger"></span>
+                        <br />
+                        <input asp-for="CollectionImage" type="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RecipeBook.Description" class="control-label"></label>
+                        <textarea id="textarea" asp-for="RecipeBook.Description" class="form-control"></textarea>
+                        <span asp-validation-for="RecipeBook.Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group text-center">
+                <input type="submit" value="Создать книгу для рецептов" class="btn btn-dark" asp-route-userName="@Model.UserName" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/autosize.min.js"></script>
+<script type="text/javascript">
+    autosize($('#textarea'));
+</script>
