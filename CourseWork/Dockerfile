@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-#COPY ["CourseWork/CourseWork.csproj", "CourseWork/"]
-#RUN dotnet restore "CourseWork/CourseWork.csproj"
+COPY ["CourseWork/CourseWork.csproj", "CourseWork/"]
+RUN dotnet restore "CourseWork/CourseWork.csproj"
 COPY . .
 WORKDIR "/src/CourseWork"
-#RUN dotnet build "CourseWork.csproj" -c Release -o /app/build
+RUN dotnet build "CourseWork.csproj" -c Release -o /app/build
 
 FROM build AS publish
-#RUN dotnet publish "CourseWork.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "CourseWork.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-#COPY --from=publish /app/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CourseWork.dll"]
